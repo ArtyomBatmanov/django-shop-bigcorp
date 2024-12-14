@@ -40,4 +40,28 @@ class Category(models.Model):
     #
     # def get_absolute_url(self):
     #     return reverse()
+
+
+class Product(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
+    title = models.CharField(verbose_name="Название", max_length=256)
+    brand = models.CharField(verbose_name="Бренд", max_length=256)
+    description = models.TextField(verbose_name="Описание", blank=True)
+    slug = models.SlugField(verbose_name="URL", max_length=256)
+    price = models.DecimalField(verbose_name="Цена", max_digits=10, decimal_places=2, default=0)
+    image = models.ImageField(verbose_name="Изображение", upload_to="products/products/%Y/%m/%d")
+    available = models.BooleanField(verbose_name="Наличие", default=False)
+    created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name="Дата изменения", auto_now=True)
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
+
+
+    def __str__(self):
+        return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse("model_detail", kwargs={"pk": self.pk})
 # Create your models here.
