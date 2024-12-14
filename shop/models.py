@@ -4,7 +4,6 @@ import string
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-from keyring.backends.libsecret import available
 
 
 def random_slug():
@@ -63,9 +62,6 @@ class Product(models.Model):
 
     # def get_absolute_url(self):
     #     return reverse("model_detail", kwargs={"pk": self.pk})
-
-
-# Create your models here.
 
 
 class ProductManager(models.Manager):
