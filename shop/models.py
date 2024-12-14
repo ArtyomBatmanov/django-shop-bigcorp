@@ -1,10 +1,10 @@
 import random
 import string
 
-
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
+from keyring.backends.libsecret import available
 
 
 def random_slug():
@@ -58,10 +58,23 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
 
-
     def __str__(self):
         return self.title
 
     # def get_absolute_url(self):
     #     return reverse("model_detail", kwargs={"pk": self.pk})
+
+
 # Create your models here.
+
+
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return super(ProductManager, self).get_queryset().filter(available=True)
+
+
+class ProductProxy(Product):
+    objects = ProductManager()
+
+    class Meta:
+        proxy = True
