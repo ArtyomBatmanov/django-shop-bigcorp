@@ -1,4 +1,4 @@
-{% block content %}
+<div> {{category.name|capfirst}}</div>
 
   {% for product in products %}
         <p><a href="{% url 'shop:product_detail' slug=product.slug %}"
@@ -9,5 +9,3 @@
 
 
     {% endfor %}
-
-{% endblock %}
