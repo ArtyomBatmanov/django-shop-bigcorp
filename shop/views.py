@@ -14,7 +14,7 @@ def product_detail_view(request, slug):
 
 def category_list_view(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    products = ProductProxy.objects.select_related("category").filter(category=category)
+    products = Product.objects.select_related("category").filter(category=category)
     context = {"category": category, "products": products}
     return render(request, "shop/category_list.html", context)
 
