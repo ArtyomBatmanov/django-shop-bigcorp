@@ -8,7 +8,7 @@ def products_list_view(request):
 
 
 def product_detail_view(request, slug):
-    product = get_object_or_404(ProductProxy, slug=slug)
+    product = get_object_or_404(Product, slug=slug)
     return render(request, "shop/product_detail.html", {"product": product})
 
 
